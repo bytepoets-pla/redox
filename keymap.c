@@ -6,6 +6,36 @@
 #define _SYMB 1
 #define _NAV 2
 
+enum custom_keycodes {
+    KC_AE = SAFE_RANGE,
+    KC_OE,
+    KC_UE
+}
+
+/// TODO: SHIFT handling
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case KC_AE:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LALT("u") "a");
+      } else {
+        // when keycode QMKBEST is released
+      }
+      break;
+    case KC_OE:
+      if (record->event.pressed) {
+                SEND_STRING(SS_LCTL("ac"));
+      }
+      break;
+    case KC_UE:
+      if (record->event.pressed) {
+                SEND_STRING(SS_LCTL("ac"));
+      }
+      break;
+  }
+  return true;
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
